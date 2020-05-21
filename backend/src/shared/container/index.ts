@@ -1,5 +1,6 @@
 import { container } from 'tsyringe';
 
+import './providers/StorageProvider';
 import '@modules/users/providers';
 
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
