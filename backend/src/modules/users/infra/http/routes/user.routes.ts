@@ -2,6 +2,7 @@ import Router from 'express';
 import { Joi, Segments, celebrate } from 'celebrate';
 
 import UsersController from '../controllers/UsersController';
+import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 
 const userRouter = Router();
 
@@ -18,5 +19,11 @@ userRouter.post(
   }),
   usersController.create,
 );
+
+userRouter.patch('/avatar', ensureAuthenticated, (request, response) => {
+  const user_id = request.user.id;
+
+  response.json({ user_id });
+});
 
 export default userRouter;
