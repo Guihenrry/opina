@@ -31,8 +31,16 @@ class FakePostsRepository implements IPostsRepository {
     return post;
   }
 
+  public async findById(id: string): Promise<Post | undefined> {
+    return this.posts.find(post => post.id === id);
+  }
+
   public async findByUserId(user_id: string): Promise<Post[]> {
     return this.posts.filter(post => post.user_id === user_id);
+  }
+
+  public async deletePostById(id: string): Promise<void> {
+    this.posts = this.posts.filter(post => post.id !== id);
   }
 }
 

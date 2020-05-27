@@ -3,5 +3,7 @@ import ICreatePostDTO from '../dtos/ICreatePostDTO';
 
 export default interface IPostsRepository {
   create(data: ICreatePostDTO): Promise<Post>;
+  findById(id: string): Promise<Post | undefined>;
   findByUserId(user_id: string): Promise<Post[]>;
+  deletePostById(id: string): Promise<void>;
 }

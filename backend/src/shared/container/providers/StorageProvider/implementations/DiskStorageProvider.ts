@@ -50,6 +50,16 @@ class DiskStorageProvider implements IStorageProvider {
       }),
     );
   }
+
+  public async deleteFiles(files: IFileDTO[]): Promise<void> {
+    const { uploadsFolder } = storageConfig;
+
+    await Promise.all(
+      files.map(file =>
+        fs.promises.unlink(path.resolve(uploadsFolder, file.filename)),
+      ),
+    );
+  }
 }
 
 export default DiskStorageProvider;

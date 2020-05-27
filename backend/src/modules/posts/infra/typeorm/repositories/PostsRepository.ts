@@ -28,11 +28,22 @@ class PostsRepository implements IPostsRepository {
     return this.ormRepository.save(post);
   }
 
+  public async findById(id: string): Promise<Post | undefined> {
+    return this.ormRepository.findOne({
+      where: { id },
+      relations: ['images'],
+    });
+  }
+
   public async findByUserId(user_id: string): Promise<Post[]> {
     return this.ormRepository.find({
       where: { user_id },
       relations: ['category', 'images'],
     });
+  }
+
+  public async deletePostById(id: string): Promise<void> {
+    await this.ormRepository.delete(id);
   }
 }
 

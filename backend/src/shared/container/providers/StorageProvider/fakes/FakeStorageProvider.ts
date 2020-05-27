@@ -32,6 +32,16 @@ class FakeStorageProvider implements IStorageProvider {
     const filesArray = files.map(file => file.filename);
     this.storage = [...this.storage, ...filesArray];
   }
+
+  public async deleteFiles(files: IFileDTO[]): Promise<void> {
+    files.forEach(file => {
+      const findIndex = this.storage.findIndex(
+        storageFile => storageFile === file.filename,
+      );
+
+      this.storage.splice(findIndex, 1);
+    });
+  }
 }
 
 export default FakeStorageProvider;

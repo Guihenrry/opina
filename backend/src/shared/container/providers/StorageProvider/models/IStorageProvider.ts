@@ -5,4 +5,5 @@ export default interface IStorageProvider {
   deleteFile(file: string): Promise<void>;
   deleteTmpFiles(files: IFileDTO[]): Promise<void>;
   saveFiles(files: IFileDTO[]): Promise<void>;
+  deleteFiles(files: IFileDTO[]): Promise<void>;
 }
