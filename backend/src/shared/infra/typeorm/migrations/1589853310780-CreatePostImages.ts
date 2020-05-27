@@ -19,7 +19,7 @@ export default class CreatePostImages1589853310780
             type: 'uuid',
           },
           {
-            name: 'image',
+            name: 'filename',
             type: 'varchar',
           },
           {

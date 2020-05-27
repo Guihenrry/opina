@@ -4,7 +4,7 @@ import { Request, Response, NextFunction } from 'express';
 
 import EnsureUserTokenValidService from '@modules/users/services/EnsureUserTokenValidService';
 
-async function EnsureAuthenticated(
+async function ensureAuthenticated(
   request: Request,
   response: Response,
   next: NextFunction,
@@ -28,4 +28,4 @@ async function EnsureAuthenticated(
   next();
 }
 
-export default EnsureAuthenticated;
+export default ensureAuthenticated;

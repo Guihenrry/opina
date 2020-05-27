@@ -13,6 +13,7 @@ export default class AddColumnCategoryIdInPosts1590455389424
       new TableColumn({
         name: 'category_id',
         type: 'uuid',
+        isNullable: true,
       }),
     );
 

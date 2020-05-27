@@ -25,6 +25,12 @@ class User {
   @Column()
   avatar: string;
 
+  @CreateDateColumn()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
+
   @Expose({ name: 'avatar_url' })
   getAvatarUrl(): string | null {
     if (!this.avatar) {
@@ -33,12 +39,6 @@ class User {
 
     return `${process.env.APP_API_URL}/files/${this.avatar}`;
   }
-
-  @CreateDateColumn()
-  created_at: Date;
-
-  @UpdateDateColumn()
-  updated_at: Date;
 }
 
 export default User;

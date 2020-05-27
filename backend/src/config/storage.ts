@@ -21,7 +21,9 @@ export default {
       filename(request, file, callback) {
         const fileHash = crypto.randomBytes(10).toString('HEX');
         const filename = `${fileHash}-${file.originalname}`;
-        callback(null, filename);
+        const filenameWitoutSpaces = filename.trim().replace(' ', '');
+
+        callback(null, filenameWitoutSpaces);
       },
     }),
   },
