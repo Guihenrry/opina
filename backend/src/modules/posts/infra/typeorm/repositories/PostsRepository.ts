@@ -27,6 +27,13 @@ class PostsRepository implements IPostsRepository {
 
     return this.ormRepository.save(post);
   }
+
+  public async findByUserId(user_id: string): Promise<Post[]> {
+    return this.ormRepository.find({
+      where: { user_id },
+      relations: ['category', 'images'],
+    });
+  }
 }
 
 export default PostsRepository;

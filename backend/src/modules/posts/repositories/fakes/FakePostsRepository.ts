@@ -11,6 +11,7 @@ class FakePostsRepository implements IPostsRepository {
     description,
     images,
     category_id,
+    user_id,
   }: ICreatePostDTO): Promise<Post> {
     const post = new Post();
 
@@ -20,6 +21,7 @@ class FakePostsRepository implements IPostsRepository {
       description,
       images,
       category_id,
+      user_id,
       created_at: new Date(),
       updated_at: new Date(),
     });
@@ -27,6 +29,10 @@ class FakePostsRepository implements IPostsRepository {
     this.posts.push(post);
 
     return post;
+  }
+
+  public async findByUserId(user_id: string): Promise<Post[]> {
+    return this.posts.filter(post => post.user_id === user_id);
   }
 }
 
