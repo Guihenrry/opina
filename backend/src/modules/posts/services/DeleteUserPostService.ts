@@ -24,7 +24,7 @@ class DeleteUserPostService {
   ) {}
 
   public async execute({ id, user_id }: IRequest): Promise<void> {
-    const post = await this.postsRepository.findById(id);
+    const post = await this.postsRepository.findById(id, ['images']);
 
     if (!post) {
       throw new AppError('Post not exists');

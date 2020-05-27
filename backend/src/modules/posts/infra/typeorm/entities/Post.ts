@@ -10,6 +10,7 @@ import {
 } from 'typeorm';
 
 import User from '@modules/users/infra/typeorm/entities/User';
+import Opinion from '@modules/opinions/infra/typeorm/entities/Opinion';
 import PostImage from './PostImage';
 import Category from './Category';
 
@@ -42,6 +43,11 @@ class Post {
     cascade: true,
   })
   images: PostImage[];
+
+  @OneToMany(() => Opinion, opinion => opinion.post, {
+    cascade: true,
+  })
+  opinions: Opinion[];
 
   @CreateDateColumn()
   created_at: Date;

@@ -12,6 +12,9 @@ import CategoryRepository from '@modules/posts/infra/typeorm/repositories/Catego
 import IPostsRepository from '@modules/posts/repositories/IPostsRepository';
 import PostsRepository from '@modules/posts/infra/typeorm/repositories/PostsRepository';
 
+import IOpinionsRepository from '@modules/opinions/repositories/IOpinionsRepository';
+import OpinionsRepository from '@modules/opinions/infra/typeorm/repositories/OpinionsRepository';
+
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
   UsersRepository,
@@ -25,4 +28,9 @@ container.registerSingleton<ICategoryRepository>(
 container.registerSingleton<IPostsRepository>(
   'PostsRepository',
   PostsRepository,
+);
+
+container.registerSingleton<IOpinionsRepository>(
+  'OpinionsRepository',
+  OpinionsRepository,
 );

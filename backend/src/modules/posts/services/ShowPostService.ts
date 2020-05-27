@@ -15,7 +15,11 @@ class ShowPostService {
   ) {}
 
   public async execute({ id }: IRequest): Promise<Post> {
-    const post = await this.postsRepository.findById(id);
+    const post = await this.postsRepository.findById(id, [
+      'opinions',
+      'images',
+      'category',
+    ]);
 
     if (!post) {
       throw new AppError('Post not found', 404);

@@ -13,6 +13,26 @@ const postRouter = Router();
 const postsController = new PostsController();
 const userPostsController = new UserPostsController();
 
+postRouter.get('/me', ensureAuthenticated, userPostsController.index);
+
+postRouter.post(
+  '/',
+  ensureAuthenticated,
+  upload.array('images', 5),
+  userPostsController.create,
+);
+
+postRouter.delete(
+  '/:id',
+  ensureAuthenticated,
+  celebrate({
+    [Segments.PARAMS]: {
+      id: Joi.string().uuid(),
+    },
+  }),
+  userPostsController.delete,
+);
+
 postRouter.get(
   '/',
   celebrate({
@@ -33,20 +53,6 @@ postRouter.get(
     },
   }),
   postsController.show,
-);
-
-postRouter.use(ensureAuthenticated);
-
-postRouter.post('/', upload.array('images', 5), postsController.create);
-postRouter.get('/me', userPostsController.index);
-postRouter.delete(
-  '/:id',
-  celebrate({
-    [Segments.PARAMS]: {
-      id: Joi.string().uuid(),
-    },
-  }),
-  userPostsController.delete,
 );
 
 export default postRouter;

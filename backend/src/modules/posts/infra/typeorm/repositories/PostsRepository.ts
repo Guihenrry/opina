@@ -29,10 +29,13 @@ class PostsRepository implements IPostsRepository {
     return this.ormRepository.save(post);
   }
 
-  public async findById(id: string): Promise<Post | undefined> {
+  public async findById(
+    id: string,
+    relations?: string[],
+  ): Promise<Post | undefined> {
     return this.ormRepository.findOne({
       where: { id },
-      relations: ['images', 'user'],
+      relations,
     });
   }
 
@@ -60,7 +63,7 @@ class PostsRepository implements IPostsRepository {
       ...(category_id ? { where: { category_id } } : {}),
       relations: ['images', 'user'],
       order: {
-        created_at: 'DESC',
+        created_at: 'ASC',
       },
     });
   }

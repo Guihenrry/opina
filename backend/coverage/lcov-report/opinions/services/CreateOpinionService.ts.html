@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for users/services/AuthenticateUserService.ts</title>
+    <title>Code coverage report for opinions/services/CreateOpinionService.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">users/services</a> AuthenticateUserService.ts</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">opinions/services</a> CreateOpinionService.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>22/22</span>
+                <span class='fraction'>24/24</span>
             </div>
         
             
@@ -107,18 +107,9 @@
 <a name='L48'></a><a href='#L48'>48</a>
 <a name='L49'></a><a href='#L49'>49</a>
 <a name='L50'></a><a href='#L50'>50</a>
-<a name='L51'></a><a href='#L51'>51</a>
-<a name='L52'></a><a href='#L52'>52</a>
-<a name='L53'></a><a href='#L53'>53</a>
-<a name='L54'></a><a href='#L54'>54</a>
-<a name='L55'></a><a href='#L55'>55</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L51'></a><a href='#L51'>51</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -151,74 +142,71 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { inject, injectable } from 'tsyringe';
-&nbsp;
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { injectable, inject } from 'tsyringe';
+import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import AppError from '@shared/errors/AppError';
-import IUsersRepository from '../repositories/IUsersRepository';
-import IHashProvider from '../providers/HashProvider/models/IHashProvider';
-import IUserTokenProvider from '../providers/UserTokenProvider/models/IUserTokenProvider';
-import User from '../infra/typeorm/entities/User';
+import IPostsRepository from '@modules/posts/repositories/IPostsRepository';
+import Opinion from '../infra/typeorm/entities/Opinion';
+import IOpinionsRepository from '../repositories/IOpinionsRepository';
 &nbsp;
 interface IRequest {
-  email: string;
-  password: string;
-}
-&nbsp;
-interface IResponse {
-  user: User;
-  token: string;
+  text: string;
+  post_id: string;
+  user_id: string;
 }
 &nbsp;
 @injectable()
-class AuthenticateUserService {
+class CreateOpinionService {
   constructor(
+    @inject('OpinionsRepository')
+    private opinionsRepository: IOpinionsRepository,
+&nbsp;
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
 &nbsp;
-    @inject('HashProvider')
-    private hashProvider: IHashProvider,
-&nbsp;
-    @inject('UserTokenProvider')
-    private userTokenProvider: IUserTokenProvider,
+    @inject('PostsRepository')
+    private postsRepository: IPostsRepository,
   ) {}
 &nbsp;
-  public async execute({ email, password }: IRequest): Promise&lt;IResponse&gt; {
-    const user = await this.usersRepository.findByEmail(email);
+  public async execute({ text, post_id, user_id }: IRequest): Promise&lt;Opinion&gt; {
+    const user = await this.usersRepository.findById(user_id);
 &nbsp;
     if (!user) {
-      throw new AppError('Incorect email/password combination', 401);
+      throw new AppError('Only authenticated user can change avatar.', 401);
     }
 &nbsp;
-    const passwordMatched = await this.hashProvider.compareHash(
-      password,
-      user.password,
-    );
+    const post = await this.postsRepository.findById(post_id);
 &nbsp;
-    if (!passwordMatched) {
-      throw new AppError('Incorect email/password combination', 401);
+    if (!post) {
+      throw new AppError('Post not exists');
     }
 &nbsp;
-    const token = this.userTokenProvider.generateToken(user.id);
+    const opinion = await this.opinionsRepository.create({
+      text,
+      post_id,
+      user_id,
+    });
 &nbsp;
-    return { user, token };
+    return opinion;
   }
 }
 &nbsp;
-export default AuthenticateUserService;
+export default CreateOpinionService;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
