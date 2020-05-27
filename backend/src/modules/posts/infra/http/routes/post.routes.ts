@@ -13,6 +13,28 @@ const postRouter = Router();
 const postsController = new PostsController();
 const userPostsController = new UserPostsController();
 
+postRouter.get(
+  '/',
+  celebrate({
+    [Segments.QUERY]: {
+      page: Joi.number().default(1),
+      per_page: Joi.number().default(9),
+      category_id: Joi.string(),
+    },
+  }),
+  postsController.index,
+);
+
+postRouter.get(
+  '/:id',
+  celebrate({
+    [Segments.PARAMS]: {
+      id: Joi.string().uuid(),
+    },
+  }),
+  postsController.show,
+);
+
 postRouter.use(ensureAuthenticated);
 
 postRouter.post('/', upload.array('images', 5), postsController.create);

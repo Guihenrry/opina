@@ -1,6 +1,7 @@
 import IPostsRepository from '@modules/posts/repositories/IPostsRepository';
 import ICreatePostDTO from '@modules/posts/dtos/ICreatePostDTO';
 import { Repository, getRepository } from 'typeorm';
+import IFindWithPaginationDTO from '@modules/posts/dtos/IFindWithPaginationDTO';
 import Post from '../entities/Post';
 
 class PostsRepository implements IPostsRepository {
@@ -31,7 +32,7 @@ class PostsRepository implements IPostsRepository {
   public async findById(id: string): Promise<Post | undefined> {
     return this.ormRepository.findOne({
       where: { id },
-      relations: ['images'],
+      relations: ['images', 'user'],
     });
   }
 
@@ -44,6 +45,24 @@ class PostsRepository implements IPostsRepository {
 
   public async deletePostById(id: string): Promise<void> {
     await this.ormRepository.delete(id);
+  }
+
+  public async findWithPagination({
+    page,
+    per_page,
+    category_id,
+  }: IFindWithPaginationDTO): Promise<Post[]> {
+    const skip = (page - 1) * per_page;
+
+    return this.ormRepository.find({
+      skip,
+      take: per_page,
+      ...(category_id ? { where: { category_id } } : {}),
+      relations: ['images', 'user'],
+      order: {
+        created_at: 'DESC',
+      },
+    });
   }
 }
 
