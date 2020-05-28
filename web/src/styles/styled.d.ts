@@ -5,8 +5,25 @@ declare module 'styled-components' {
     title: string;
 
     colors: {
-      primary: string;
+      main: string;
       background: string;
+
+      text: string;
+      textLight: string;
+      textMedium: string;
+
+      border: string;
+    };
+
+    sizes: {
+      container: string;
+      xxs: string;
+      xs: string;
+      sm: string;
+      m: string;
+      md: string;
+      lg: string;
+      xlg: string;
     };
   }
 }

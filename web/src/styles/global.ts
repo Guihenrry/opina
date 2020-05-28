@@ -19,6 +19,7 @@ export default createGlobalStyle`
 
   body, input, button {
     font-family: 'Roboto', sans-serif;
+    font-size: ${(props) => props.theme.sizes.sm};
   }
 
   button {
