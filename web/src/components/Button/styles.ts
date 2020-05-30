@@ -1,27 +1,33 @@
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 
-interface ButtonProps {
-  fullWidth: number;
-}
+const rotate = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+`;
 
-export const Button = styled.button<ButtonProps>`
+export const Button = styled.button`
   border: none;
   font-weight: bold;
   transition: opacity 0.3s;
   :hover {
     opacity: 0.9;
   }
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   ${({ theme }) => css`
     border-radius: ${theme.sizes.xs};
     padding: ${theme.sizes.sm};
     color: ${theme.colors.textLight};
-    background: ${theme.colors.main};
+    background: ${theme.colors.primary};
   `}
 
-  ${(props) =>
-    props.fullWidth &&
-    css`
-      width: 100%;
-    `}
+  svg {
+    animation: ${rotate} 2s linear infinite;
+  }
 `;

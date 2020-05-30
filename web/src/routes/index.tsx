@@ -1,18 +1,21 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes } from 'react-router-dom';
+
+import Route from './Route';
 
 import Home from '../pages/Home';
 import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
+import useAuth from '../hooks/useAuth';
 
 const AppRoutes: React.FC = () => {
+  const { user } = useAuth();
+
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/signin" element={<SignIn />} />
-      <Route path="/signup" element={<SignUp />} />
-
-      <Route path="*" element={<p>Not Found Route</p>} />
+      <Route path="/" element={Home} />
+      <Route path="/signin" element={SignIn} redirect={!!user} />
+      <Route path="/signup" element={SignUp} redirect={!!user} />
     </Routes>
   );
 };

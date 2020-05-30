@@ -25,7 +25,9 @@
   "plugins": ["react", "react-hooks", "@typescript-eslint", "prettier"],
   "rules": {
     "react/jsx-props-no-spreading": "off",
-    "@typescript-eslint/explicit-module-boundary-types": "off",
+    // "@typescript-eslint/explicit-module-boundary-types": "off",
+    "camelcase": "off",
+    "react/jsx-one-expression-per-line": "off",
     "react/prop-types": "off",
     "prettier/prettier": "error",
     "react-hooks/rules-of-hooks": "error",

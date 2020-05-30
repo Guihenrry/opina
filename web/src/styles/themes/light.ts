@@ -2,14 +2,21 @@ export default {
   title: 'light',
 
   colors: {
-    main: '#506CB2',
+    primary: '#506CB2',
     background: '#FFFFFF',
-
-    text: '#010001',
+    backgroundMedium: '#F1EFF1',
+    muted: '#EAE9EA',
     textLight: '#FFFFFF',
     textMedium: '#84838B',
+    text: '#010001',
+    danger: '#D34242',
+    success: '#27AE60',
+  },
 
-    border: '#EAE9EA',
+  fonts: {
+    logo: "'Pacifico', cursive",
+    body: "'Roboto', sans-serif",
+    heading: "'Roboto Slab', serif",
   },
 
   sizes: {

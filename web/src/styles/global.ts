@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, css } from 'styled-components';
 
 export default createGlobalStyle`
   * {
@@ -13,13 +13,20 @@ export default createGlobalStyle`
   }
 
   body {
-    background: ${(props) => props.theme.colors.background};
     -webkit-font-smoothing: antialiased;
+
+    ${({ theme }) => css`
+      color: ${theme.colors.text};
+      background: ${theme.colors.background};
+    `}
   }
 
   body, input, button {
-    font-family: 'Roboto', sans-serif;
-    font-size: ${(props) => props.theme.sizes.sm};
+
+    ${({ theme }) => css`
+      font-family: ${theme.fonts.body};
+      font-size: ${theme.sizes.sm};
+    `}
   }
 
   button {

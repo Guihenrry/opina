@@ -5,14 +5,21 @@ declare module 'styled-components' {
     title: string;
 
     colors: {
-      main: string;
+      primary: string;
       background: string;
-
+      backgroundMedium: string;
       text: string;
       textLight: string;
       textMedium: string;
+      muted: string;
+      danger: string;
+      success: string;
+    };
 
-      border: string;
+    fonts: {
+      logo: string;
+      body: string;
+      heading: string;
     };
 
     sizes: {

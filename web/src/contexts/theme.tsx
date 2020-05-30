@@ -8,6 +8,7 @@ import { dark, light } from '../styles/themes';
 
 export interface ThemeContextType {
   changeTheme(themeTitle: 'light' | 'dark'): void;
+  toggleTheme(): void;
   theme: DefaultTheme;
 }
 
@@ -29,8 +30,16 @@ const ThemeProvider: React.FC = ({ children }) => {
     localStorage.setItem('@Opina:theme', themeTitle);
   }, []);
 
+  const toggleTheme = useCallback(() => {
+    setTheme(theme.title === 'dark' ? light : dark);
+    localStorage.setItem(
+      '@Opina:theme',
+      theme.title === 'dark' ? 'light' : 'dark',
+    );
+  }, [theme]);
+
   return (
-    <ThemeContext.Provider value={{ theme, changeTheme }}>
+    <ThemeContext.Provider value={{ theme, changeTheme, toggleTheme }}>
       <StyledThemeProvider theme={theme}>{children}</StyledThemeProvider>
     </ThemeContext.Provider>
   );

@@ -1,7 +1,14 @@
 import React from 'react';
+import useAuth from '../../hooks/useAuth';
 
 const Home: React.FC = () => {
-  return <h1>Home</h1>;
+  const { signOut } = useAuth();
+
+  return (
+    <button type="button" onClick={signOut}>
+      Sair
+    </button>
+  );
 };
 
 export default Home;
