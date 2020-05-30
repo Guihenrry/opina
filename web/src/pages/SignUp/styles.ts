@@ -12,6 +12,10 @@ export const Wrapper = styled.section`
   ${({ theme }) => css`
     padding: ${theme.sizes.m};
   `}
+
+  @media screen and (max-width: 860px) {
+    background: none;
+  }
 `;
 
 export const Container = styled.div`
@@ -24,6 +28,15 @@ export const Container = styled.div`
   ${({ theme }) => css`
     max-width: ${theme.sizes.container};
   `}
+
+  @media screen and (max-width: 860px) {
+    align-items: center;
+  }
+`;
+
+export const SignWrapper = styled.div`
+  width: 384px;
+  max-width: 100%;
 `;
 
 export const Title = styled.h1`
@@ -44,7 +57,6 @@ export const Subtitle = styled.p`
 
 export const Navigation = styled.div`
   display: flex;
-  max-width: 384px;
 
   ${({ theme }) => css`
     border-bottom: 2px solid ${theme.colors.muted};
@@ -72,7 +84,6 @@ export const NavigationLink = styled(NavLink)`
 
 export const Form = styled.form`
   width: 100%;
-  max-width: 384px;
 `;
 
 export const SubmitButton = styled(Button)`
