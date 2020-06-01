@@ -15,6 +15,7 @@ interface User {
 export interface AuthContextType {
   signIn(credentials: Credentials): Promise<void>;
   signOut(): void;
+  updateUser(user: User): void;
   user: User;
 }
 
@@ -66,8 +67,22 @@ const AuthProvider: React.FC = ({ children }) => {
     setData({} as AuthState);
   }, []);
 
+  const updateUser = useCallback(
+    (user: User) => {
+      setData({
+        ...data,
+        user,
+      });
+
+      localStorage.setItem('@Opina:user', JSON.stringify(user));
+    },
+    [data],
+  );
+
   return (
-    <AuthContext.Provider value={{ signIn, signOut, user: data.user }}>
+    <AuthContext.Provider
+      value={{ signIn, signOut, user: data.user, updateUser }}
+    >
       {children}
     </AuthContext.Provider>
   );

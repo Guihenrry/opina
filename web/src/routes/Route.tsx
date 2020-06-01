@@ -12,6 +12,7 @@ const AppRoute: React.FC<AppRouteProps> = ({
   element: Element,
   redirect,
   redirectTo,
+  children,
   ...rest
 }) => {
   const navigate = useNavigate();
@@ -22,7 +23,11 @@ const AppRoute: React.FC<AppRouteProps> = ({
     }
   }, [redirectTo, redirect, navigate]);
 
-  return <Route element={<Element />} {...rest} />;
+  return (
+    <Route element={<Element />} {...rest}>
+      {children}
+    </Route>
+  );
 };
 
 export default AppRoute;

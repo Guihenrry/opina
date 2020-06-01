@@ -15,3 +15,17 @@ export function hexToRGB(hex: string, alpha = 1): string {
 
   return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 }
+
+export function stringToHslColor(
+  str: string,
+  saturation: number,
+  lightness: number,
+): string {
+  let hash = 0;
+  for (let i = 0; i < str.length; i += 1) {
+    hash = str.charCodeAt(i) + hash;
+  }
+
+  const hue = hash % 360;
+  return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+}

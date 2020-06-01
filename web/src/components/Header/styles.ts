@@ -43,6 +43,12 @@ export const Right = styled.div`
   align-items: center;
 `;
 
+export const ProfileLink = styled(Link)`
+  ${({ theme }) => css`
+    margin-left: ${theme.sizes.m};
+  `}
+`;
+
 export const SignWrrapper = styled.div`
   display: flex;
   align-items: center;

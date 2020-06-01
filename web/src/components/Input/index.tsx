@@ -11,7 +11,7 @@ import * as S from './styles';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   icon?: React.ComponentType<IconBaseProps>;
-  error: string;
+  error?: string;
 }
 
 const Input: React.FC<InputProps> = ({ icon: Icon, error, ...rest }) => {
@@ -34,7 +34,7 @@ const Input: React.FC<InputProps> = ({ icon: Icon, error, ...rest }) => {
         {...rest}
         onFocus={hanldeInputFocus}
         onBlur={hanldeInputBlur}
-        isErrored={error}
+        isErrored={error || ''}
       />
       {error && (
         <S.Error>
