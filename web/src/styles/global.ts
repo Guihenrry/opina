@@ -21,7 +21,7 @@ export default createGlobalStyle`
     `}
   }
 
-  body, input, button {
+  body, input, button, textarea {
 
     ${({ theme }) => css`
       font-family: ${theme.fonts.body};

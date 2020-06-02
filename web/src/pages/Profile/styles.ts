@@ -9,6 +9,10 @@ export const Container = styled.div`
     max-width: ${theme.sizes.container};
     padding: ${theme.sizes.xlg} ${theme.sizes.m};
   `}
+
+  @media screen and (max-width: 900px) {
+    flex-direction: column;
+  }
 `;
 
 export const Navigation = styled.nav`
@@ -16,6 +20,13 @@ export const Navigation = styled.nav`
     margin-right: ${theme.sizes.xlg};
     padding-right: ${theme.sizes.xlg};
     border-right: 1px solid ${theme.colors.muted};
+
+    @media screen and (max-width: 900px) {
+      border-right: 0;
+      border-bottom: 1px solid ${theme.colors.muted};
+      margin: 0 0 ${theme.sizes.md};
+      padding: 0 0 ${theme.sizes.md};
+    }
   `}
 `;
 
@@ -47,6 +58,10 @@ export const NavigationLink = styled(NavLink)`
       border-left-color: ${theme.colors.primary};
     }
   `};
+
+  @media screen and (max-width: 900px) {
+    width: 100%;
+  }
 `;
 
 export const SignOutButton = styled.button`
@@ -64,6 +79,10 @@ export const SignOutButton = styled.button`
     border-left: 4px solid ${theme.colors.backgroundMedium};
     color: ${theme.colors.danger};
   `};
+
+  @media screen and (max-width: 900px) {
+    width: 100%;
+  }
 `;
 
 export const Content = styled.main`

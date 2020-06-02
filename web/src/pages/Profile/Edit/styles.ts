@@ -8,6 +8,10 @@ export const Title = styled.h1`
     font-size: ${theme.sizes.md};
     margin-bottom: ${theme.sizes.lg};
   `}
+
+  @media screen and (max-width: 900px) {
+    text-align: center;
+  }
 `;
 
 export const AvatarUpload = styled.label`
@@ -20,6 +24,11 @@ export const AvatarUpload = styled.label`
   ${({ theme }) => css`
     margin-bottom: ${theme.sizes.md};
   `}
+
+  @media screen and (max-width: 900px) {
+    margin-left: auto;
+    margin-right: auto;
+  }
 
   input {
     display: none;
@@ -80,6 +89,11 @@ export const Form = styled.form`
       margin-bottom: ${theme.sizes.m};
     }
   `}
+
+  @media screen and (max-width: 900px) {
+    margin-left: auto;
+    margin-right: auto;
+  }
 `;
 
 export const SubmitButton = styled(Button)`
