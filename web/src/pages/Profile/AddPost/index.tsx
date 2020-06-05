@@ -5,9 +5,9 @@ import React, {
   FormEvent,
   useMemo,
 } from 'react';
-// import { useNavigate } from 'react-router';
 import * as Yup from 'yup';
 
+import { useNavigate } from 'react-router';
 import UploadDropzone from '../../../components/UploadDropzone';
 
 import * as S from './styles';
@@ -18,6 +18,7 @@ import api from '../../../services/api';
 
 const AddPost: React.FC = () => {
   const { addToast } = useToast();
+  const navigate = useNavigate();
 
   const [image1, setImage1] = useState({} as File);
   const [image2, setImage2] = useState({} as File);
@@ -97,6 +98,7 @@ const AddPost: React.FC = () => {
             description:
               'Postagem adicionada, já está disponivel para receber opiniões.',
           });
+          navigate('/profile/posts');
         } catch {
           addToast({
             type: 'error',
@@ -117,6 +119,7 @@ const AddPost: React.FC = () => {
       image5,
       addToast,
       category,
+      navigate,
     ],
   );
 

@@ -1,6 +1,7 @@
 import Post from '@modules/posts/infra/typeorm/entities/Post';
 import { uuid } from 'uuidv4';
 import IFindWithPaginationDTO from '@modules/posts/dtos/IFindWithPaginationDTO';
+import IResponseFindWithPaginationDTO from '@modules/posts/dtos/IResponseFindWithPaginationDTO';
 import ICreatePostDTO from '../../dtos/ICreatePostDTO';
 import IPostsRepository from '../IPostsRepository';
 
@@ -48,15 +49,23 @@ class FakePostsRepository implements IPostsRepository {
     per_page,
     page,
     category_id,
-  }: IFindWithPaginationDTO): Promise<Post[]> {
-    const filterPosts = category_id
+    title,
+  }: IFindWithPaginationDTO): Promise<IResponseFindWithPaginationDTO> {
+    let filterPosts = category_id
       ? this.posts.filter(post => post.category_id === category_id)
       : this.posts;
+
+    filterPosts = title
+      ? filterPosts.filter(post => post.title === title)
+      : filterPosts;
 
     const skip = (page - 1) * per_page;
     const lastPost = per_page * page;
 
-    return filterPosts.slice(skip, lastPost);
+    return {
+      posts: filterPosts.slice(skip, lastPost),
+      total: filterPosts.length,
+    };
   }
 }
 

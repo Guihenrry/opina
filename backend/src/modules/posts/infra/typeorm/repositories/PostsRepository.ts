@@ -1,7 +1,8 @@
 import IPostsRepository from '@modules/posts/repositories/IPostsRepository';
 import ICreatePostDTO from '@modules/posts/dtos/ICreatePostDTO';
-import { Repository, getRepository } from 'typeorm';
+import { Repository, getRepository, Like } from 'typeorm';
 import IFindWithPaginationDTO from '@modules/posts/dtos/IFindWithPaginationDTO';
+import IResponseFindWithPaginationDTO from '@modules/posts/dtos/IResponseFindWithPaginationDTO';
 import Post from '../entities/Post';
 
 class PostsRepository implements IPostsRepository {
@@ -43,6 +44,9 @@ class PostsRepository implements IPostsRepository {
     return this.ormRepository.find({
       where: { user_id },
       relations: ['category', 'images'],
+      order: {
+        created_at: 'DESC',
+      },
     });
   }
 
@@ -54,18 +58,29 @@ class PostsRepository implements IPostsRepository {
     page,
     per_page,
     category_id,
-  }: IFindWithPaginationDTO): Promise<Post[]> {
+    title,
+  }: IFindWithPaginationDTO): Promise<IResponseFindWithPaginationDTO> {
     const skip = (page - 1) * per_page;
 
-    return this.ormRepository.find({
+    const where = {
+      ...(category_id ? { category_id } : {}),
+      ...(title ? { title: Like(`%${title}%`) } : {}),
+    };
+
+    const [posts, total] = await this.ormRepository.findAndCount({
       skip,
       take: per_page,
-      ...(category_id ? { where: { category_id } } : {}),
-      relations: ['images', 'user'],
+      where,
+      relations: ['images', 'user', 'opinions'],
       order: {
-        created_at: 'ASC',
+        created_at: 'DESC',
       },
     });
+
+    return {
+      posts,
+      total,
+    };
   }
 }
 

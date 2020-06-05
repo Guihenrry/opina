@@ -1,13 +1,20 @@
 import ListPostsService from './ListPostsService';
 import FakePostsRepository from '../repositories/fakes/FakePostsRepository';
 
+import FakeCategoryRepository from '../repositories/fakes/FakeCategoryRepository';
+
 let fakePostsRepository: FakePostsRepository;
+let fakeCategoryRepository: FakeCategoryRepository;
 let listPosts: ListPostsService;
 
 describe('ListPosts', () => {
   beforeEach(() => {
     fakePostsRepository = new FakePostsRepository();
-    listPosts = new ListPostsService(fakePostsRepository);
+    fakeCategoryRepository = new FakeCategoryRepository();
+    listPosts = new ListPostsService(
+      fakePostsRepository,
+      fakeCategoryRepository,
+    );
   });
 
   it('Should be able to list posts', async () => {
@@ -35,19 +42,24 @@ describe('ListPosts', () => {
       images: [],
     });
 
-    const posts = await listPosts.execute({
+    const response = await listPosts.execute({
       per_page: 2,
       page: 1,
     });
 
-    expect(posts).toEqual([post1, post2]);
+    expect(response.posts).toEqual([post1, post2]);
+    expect(response.total).toBe(3);
   });
 
-  it('should be able to filter list post with category id', async () => {
+  it('should be able to filter list post with category title', async () => {
+    const category = await fakeCategoryRepository.create({
+      title: 'Tecnologia',
+    });
+
     const post1 = await fakePostsRepository.create({
       title: 'Macbook',
       description: 'Notebook Apple.',
-      category_id: 'Tecnologia',
+      category_id: category.id,
       user_id: 'user-id',
       images: [],
     });
@@ -68,12 +80,40 @@ describe('ListPosts', () => {
       images: [],
     });
 
-    const posts = await listPosts.execute({
+    const response = await listPosts.execute({
       per_page: 3,
       page: 1,
-      category_id: 'Tecnologia',
+      category: 'Tecnologia',
     });
 
-    expect(posts).toEqual([post1]);
+    expect(response.posts).toEqual([post1]);
+    expect(response.total).toBe(1);
+  });
+
+  it('Should be able to filter posts by title', async () => {
+    const post1 = await fakePostsRepository.create({
+      title: 'Macbook',
+      description: 'Notebook Apple.',
+      category_id: '1-2-3',
+      user_id: 'user-id',
+      images: [],
+    });
+
+    await fakePostsRepository.create({
+      title: 'Other Title',
+      description: 'Notebook Apple.',
+      category_id: '1-2-3',
+      user_id: 'user-id',
+      images: [],
+    });
+
+    const response = await listPosts.execute({
+      per_page: 2,
+      page: 1,
+      title: 'Macbook',
+    });
+
+    expect(response.posts).toEqual([post1]);
+    expect(response.total).toBe(1);
   });
 });

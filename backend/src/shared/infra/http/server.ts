@@ -9,11 +9,12 @@ import { errors } from 'celebrate';
 import '@shared/infra/typeorm';
 import '@shared/container';
 import storageConfig from '@config/storage';
+import corsConfig from '@config/cors';
 import routes from './routes';
 import exceptionHandling from './middlewares/exceptionHandling';
 
 const app = express();
-app.use(cors());
+app.use(cors(corsConfig));
 app.use(express.json());
 app.use(routes);
 app.use(errors());

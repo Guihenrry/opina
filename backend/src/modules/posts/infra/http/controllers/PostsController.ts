@@ -6,15 +6,18 @@ import ShowPostService from '@modules/posts/services/ShowPostService';
 
 export default class PostsController {
   public async index(request: Request, response: Response): Promise<Response> {
-    const { page, per_page, category_id } = request.query;
+    const { page, per_page, category, title } = request.query;
 
     const listPosts = container.resolve(ListPostsService);
 
-    const posts = await listPosts.execute({
+    const { posts, total } = await listPosts.execute({
       page: Number(page),
       per_page: Number(per_page),
-      category_id: typeof category_id === 'string' ? category_id : undefined,
+      category: typeof category === 'string' ? category : undefined,
+      title: typeof title === 'string' ? title : undefined,
     });
+
+    response.header('X-Total-Count', String(total));
 
     return response.json(classToClass(posts));
   }

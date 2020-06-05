@@ -39,7 +39,8 @@ postRouter.get(
     [Segments.QUERY]: {
       page: Joi.number().default(1),
       per_page: Joi.number().default(9),
-      category_id: Joi.string(),
+      category: Joi.string(),
+      title: Joi.string(),
     },
   }),
   postsController.index,

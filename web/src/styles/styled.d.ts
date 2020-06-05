@@ -24,6 +24,7 @@ declare module 'styled-components' {
 
     sizes: {
       container: string;
+      containerWidthPadding: string;
       xxs: string;
       xs: string;
       sm: string;

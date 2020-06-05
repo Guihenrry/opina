@@ -130,6 +130,160 @@ export const IntroText = styled.p`
   `}
 `;
 
-export const Space = styled.div`
-  height: 1000px;
+export const Filters = styled.section`
+  max-width: 840px;
+  margin: 0 auto;
+  display: grid;
+  grid-auto-flow: column;
+
+  ${({ theme }) => css`
+    gap: ${theme.sizes.xs};
+    padding: ${theme.sizes.lg} ${theme.sizes.m};
+  `}
+
+  @media screen and (max-width: 730px) {
+    grid-auto-flow: row;
+    grid-template-columns: 1fr 1fr;
+
+    > form {
+      grid-column: 1/3;
+    }
+  }
+  @media screen and (max-width: 400px) {
+    grid-template-columns: 1fr;
+
+    > form {
+      grid-column: 1/2;
+    }
+  }
+`;
+
+interface CategoryButtonProps {
+  active: number;
+}
+
+export const CategoryButton = styled.button<CategoryButtonProps>`
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  ${({ theme, active }) => css`
+    background: ${theme.colors.backgroundMedium};
+    color: ${theme.colors.text};
+    padding: ${theme.sizes.sm};
+    border-radius: ${theme.sizes.xs};
+
+    &::before {
+      content: '';
+      display: block;
+      width: ${theme.sizes.xs};
+      height: ${theme.sizes.xs};
+      margin-right: ${theme.sizes.xs};
+      border-radius: 50%;
+      border: 2px solid ${theme.colors.text};
+      background: ${active
+        ? theme.colors.primary
+        : theme.colors.backgroundMedium};
+    }
+  `}
+`;
+
+export const Posts = styled.section`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: 0 auto;
+
+  @media screen and (max-width: 800px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media screen and (max-width: 500px) {
+    grid-template-columns: 1fr;
+  }
+
+  ${({ theme }) => css`
+    max-width: ${theme.sizes.containerWidthPadding};
+    gap: ${theme.sizes.md};
+    padding: 0 ${theme.sizes.m} ${theme.sizes.lg} ${theme.sizes.m};
+  `}
+`;
+
+export const Post = styled.article``;
+
+export const PostInfo = styled.div`
+  position: relative;
+
+  &:hover > div {
+    opacity: 1;
+  }
+
+  ${({ theme }) => css`
+    margin-bottom: ${theme.sizes.xs};
+  `}
+`;
+
+interface PostImageProps {
+  image: string;
+}
+
+export const PostImage = styled.div<PostImageProps>`
+  height: 290px;
+  background: url('${(props) => props.image}') no-repeat center center;
+  background-size: cover;
+
+  ${({ theme }) => css`
+    border-radius: ${theme.sizes.sm};
+  `}
+`;
+
+export const PostDetail = styled.div`
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.4));
+  transition: opacity 0.3s;
+  opacity: 0;
+
+  ${({ theme }) => css`
+    padding: ${theme.sizes.sm};
+    border-radius: 0 0 ${theme.sizes.sm} ${theme.sizes.sm};
+  `}
+`;
+
+export const PostUser = styled.div`
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+
+  ${({ theme }) => css`
+    > span {
+      color: ${theme.colors.textLight};
+      margin-left: ${theme.sizes.xs};
+    }
+  `}
+`;
+
+export const PostOpinions = styled.div`
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+
+  ${({ theme }) => css`
+    color: ${theme.colors.textLight};
+    > svg {
+      margin-right: ${theme.sizes.xs};
+    }
+  `}
+`;
+
+export const PostTitle = styled.h1`
+  font-weight: 400;
+
+  ${({ theme }) => css`
+    font-size: ${theme.sizes.sm};
+    color: ${theme.colors.textLight};
+  `}
 `;

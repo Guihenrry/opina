@@ -21,6 +21,7 @@ export default {
 
   sizes: {
     container: '1216px',
+    containerWidthPadding: '1264px',
     xxs: '0.25rem', // 4px
     xs: '0.5rem', // 8px
     sm: '1rem', // 16px

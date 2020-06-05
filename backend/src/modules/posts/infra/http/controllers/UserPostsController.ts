@@ -38,7 +38,7 @@ class UserPostsController {
       user_id,
     });
 
-    return response.json(posts);
+    return response.json(classToClass(posts));
   }
 
   public async delete(request: Request, response: Response): Promise<Response> {
