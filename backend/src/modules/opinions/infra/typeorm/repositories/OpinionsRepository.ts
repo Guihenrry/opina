@@ -35,6 +35,30 @@ class OpinionsRepository implements IOpinionsRepository {
   public async deleteById(id: string): Promise<void> {
     await this.ormRepository.delete(id);
   }
+
+  public async findByPostId(post_id: string): Promise<Opinion[]> {
+    const opinions = await this.ormRepository.find({
+      where: { post_id },
+      order: {
+        created_at: 'DESC',
+      },
+      relations: ['user'],
+    });
+
+    return opinions;
+  }
+
+  public async findByUserId(user_id: string): Promise<Opinion[]> {
+    const opinions = await this.ormRepository.find({
+      where: { user_id },
+      order: {
+        created_at: 'DESC',
+      },
+      relations: ['post'],
+    });
+
+    return opinions;
+  }
 }
 
 export default OpinionsRepository;

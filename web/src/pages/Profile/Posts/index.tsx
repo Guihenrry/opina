@@ -59,6 +59,11 @@ const Posts: React.FC = () => {
         await api.delete(`/posts/${id}`);
 
         setPosts(posts.filter((post) => post.id !== id));
+
+        addToast({
+          type: 'success',
+          title: 'Postagem deletata com suceso!',
+        });
       } catch {
         addToast({
           type: 'error',
@@ -76,7 +81,9 @@ const Posts: React.FC = () => {
 
       {posts.map((post) => (
         <S.Post key={post.id}>
-          <S.PostImage src={post.images[0]?.image} />
+          <S.PostLink to={`/post/${post.id}`}>
+            <S.PostImage src={post.images[0]?.image} />
+          </S.PostLink>
           <S.PostInfo>
             <S.PostTitle>{post?.title}</S.PostTitle>
             <S.Category>{post.category?.title}</S.Category>

@@ -92,6 +92,7 @@ export const TextArea = styled.textarea`
   ${({ theme }) => css`
     height: 150px;
     max-width: 100%;
+    line-height: 1.5;
     width: 100%;
     padding: ${theme.sizes.sm};
     border-radius: ${theme.sizes.xs};

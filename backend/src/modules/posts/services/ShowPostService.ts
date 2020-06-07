@@ -16,9 +16,9 @@ class ShowPostService {
 
   public async execute({ id }: IRequest): Promise<Post> {
     const post = await this.postsRepository.findById(id, [
-      'opinions',
       'images',
       'category',
+      'user',
     ]);
 
     if (!post) {

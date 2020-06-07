@@ -41,6 +41,7 @@ class Post {
 
   @OneToMany(() => PostImage, postImage => postImage.post, {
     cascade: true,
+    eager: true,
   })
   images: PostImage[];
 

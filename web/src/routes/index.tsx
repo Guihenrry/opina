@@ -4,6 +4,7 @@ import { Routes } from 'react-router-dom';
 import Route from './Route';
 
 import Home from '../pages/Home';
+import Post from '../pages/Post';
 import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
 import useAuth from '../hooks/useAuth';
@@ -19,8 +20,11 @@ const AppRoutes: React.FC = () => {
   return (
     <Routes>
       <Route path="/" element={Home} />
+      <Route path="/post/:id" element={Post} />
+
       <Route path="/signin" element={SignIn} redirect={!!user} />
       <Route path="/signup" element={SignUp} redirect={!!user} />
+
       <Route
         path="/profile"
         element={Profile}

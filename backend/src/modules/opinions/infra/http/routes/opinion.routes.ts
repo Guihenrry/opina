@@ -3,15 +3,28 @@ import { celebrate, Segments, Joi } from 'celebrate';
 
 import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensureAuthenticated';
 import UserOpinionsController from '../controllers/UserOpinionsController';
+import OpinionsController from '../controllers/OpinionsController';
 
 const opinionRouter = Router();
 
 const userOpinionsController = new UserOpinionsController();
+const opinionsController = new OpinionsController();
 
-opinionRouter.use(ensureAuthenticated);
+opinionRouter.get(
+  '/:post_id',
+  celebrate({
+    [Segments.PARAMS]: Joi.object().keys({
+      post_id: Joi.string().uuid(),
+    }),
+  }),
+  opinionsController.show,
+);
+
+opinionRouter.get('/', ensureAuthenticated, userOpinionsController.index);
 
 opinionRouter.post(
   '/',
+  ensureAuthenticated,
   celebrate({
     [Segments.BODY]: {
       text: Joi.string().required(),
@@ -23,6 +36,7 @@ opinionRouter.post(
 
 opinionRouter.put(
   '/:opinion_id',
+  ensureAuthenticated,
   celebrate({
     [Segments.BODY]: {
       text: Joi.string().required(),
@@ -36,6 +50,7 @@ opinionRouter.put(
 
 opinionRouter.delete(
   '/:opinion_id',
+  ensureAuthenticated,
   celebrate({
     [Segments.PARAMS]: {
       opinion_id: Joi.string().uuid(),

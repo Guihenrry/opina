@@ -6,4 +6,6 @@ export default interface IOpinionsRepository {
   findById(id: string): Promise<Opinion | undefined>;
   save(opinion: Opinion): Promise<Opinion>;
   deleteById(id: string): Promise<void>;
+  findByPostId(post_id: string): Promise<Opinion[]>;
+  findByUserId(user_id: string): Promise<Opinion[]>;
 }

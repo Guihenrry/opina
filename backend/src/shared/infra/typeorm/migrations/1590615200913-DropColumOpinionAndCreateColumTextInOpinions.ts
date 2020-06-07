@@ -22,6 +22,7 @@ export default class DropColumOpinionAndCreateColumTextInOpinions1590615200913
       new TableColumn({
         name: 'opinion',
         type: 'varchar',
+        isNullable: true,
       }),
     );
   }

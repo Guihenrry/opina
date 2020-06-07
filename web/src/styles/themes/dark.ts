@@ -3,12 +3,12 @@ export default {
 
   colors: {
     primary: '#506CB2',
-    background: '#333333',
-    backgroundMedium: '#444444',
-    muted: '#444444',
+    background: '#181818',
+    backgroundMedium: '#222222',
+    muted: '#303030',
     textLight: '#FFFFFF',
-    textMedium: '#999999',
-    text: '#FFFFFF',
+    textMedium: '#aaaaaa',
+    text: '#fafafa',
     danger: '#D34242',
     success: '#27AE60',
   },

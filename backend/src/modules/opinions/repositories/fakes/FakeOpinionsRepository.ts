@@ -48,6 +48,22 @@ class FakeOpinionsRepository implements IOpinionsRepository {
 
     this.opinions.splice(findIndex, 1);
   }
+
+  public async findByPostId(post_id: string): Promise<Opinion[]> {
+    const opinions = this.opinions.filter(
+      opinion => opinion.post_id === post_id,
+    );
+
+    return opinions;
+  }
+
+  public async findByUserId(user_id: string): Promise<Opinion[]> {
+    const opinions = this.opinions.filter(
+      opinion => opinion.user_id === user_id,
+    );
+
+    return opinions;
+  }
 }
 
 export default FakeOpinionsRepository;

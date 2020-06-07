@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const Title = styled.h1`
   ${({ theme }) => css`
@@ -24,11 +25,10 @@ export const Post = styled.article`
   }
 `;
 
-export const PostImage = styled.img`
+export const PostLink = styled(Link)`
   width: 50%;
   align-self: flex-start;
   ${({ theme }) => css`
-    border-radius: ${theme.sizes.sm};
     margin-right: ${theme.sizes.md};
   `}
 
@@ -40,6 +40,14 @@ export const PostImage = styled.img`
       margin-bottom: ${theme.sizes.sm};
     `}
   }
+`;
+
+export const PostImage = styled.img`
+  width: 100%;
+
+  ${({ theme }) => css`
+    border-radius: ${theme.sizes.sm};
+  `}
 `;
 
 export const PostInfo = styled.div`

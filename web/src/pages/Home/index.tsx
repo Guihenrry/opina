@@ -194,7 +194,7 @@ const Home: React.FC = () => {
             O opina é o lugar certo para se expressar e saber a opinião do
             publico sobre um produto.
           </S.IntroText>
-          <Link to={user ? '/profile/add-post' : '/signin'}>
+          <Link to={user ? '/profile/add-post' : '/signup'}>
             <Button type="button">
               {user ? 'Cadastrar post' : 'Criar sua conta'}
             </Button>
@@ -258,6 +258,10 @@ const Home: React.FC = () => {
       </S.Posts>
 
       {isLoading && <Loading />}
+
+      {!isLoading && posts.length === 0 && (
+        <S.TextNullstate>Ops nenhum resultado encontrado</S.TextNullstate>
+      )}
     </>
   );
 };

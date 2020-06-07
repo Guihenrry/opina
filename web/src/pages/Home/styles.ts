@@ -284,6 +284,14 @@ export const PostTitle = styled.h1`
 
   ${({ theme }) => css`
     font-size: ${theme.sizes.sm};
-    color: ${theme.colors.textLight};
+    color: ${theme.colors.text};
+  `}
+`;
+
+export const TextNullstate = styled.p`
+  ${({ theme }) => css`
+    color: ${theme.colors.textMedium};
+    text-align: center;
+    margin-bottom: ${theme.sizes.xlg};
   `}
 `;

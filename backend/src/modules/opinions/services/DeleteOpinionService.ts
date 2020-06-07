@@ -1,6 +1,6 @@
 import { injectable, inject } from 'tsyringe';
 import AppError from '@shared/errors/AppError';
-import Opinion from '../infra/typeorm/entities/Opinion';
+
 import IOpinionsRepository from '../repositories/IOpinionsRepository';
 
 interface IRequest {

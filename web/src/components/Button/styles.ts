@@ -9,7 +9,11 @@ const rotate = keyframes`
   }
 `;
 
-export const Button = styled.button`
+interface ButtonProps {
+  secondary: number;
+}
+
+export const Button = styled.button<ButtonProps>`
   border: none;
   font-weight: bold;
   transition: opacity 0.3s;
@@ -20,11 +24,15 @@ export const Button = styled.button`
   align-items: center;
   justify-content: center;
 
-  ${({ theme }) => css`
+  ${({ theme, secondary }) => css`
     border-radius: ${theme.sizes.xs};
     padding: ${theme.sizes.sm};
-    color: ${theme.colors.textLight};
-    background: ${theme.colors.primary};
+    color: ${secondary ? theme.colors.primary : theme.colors.textLight};
+    background: ${secondary ? 'transparent' : theme.colors.primary};
+    &:disabled {
+      background: ${theme.colors.backgroundMedium};
+      color: ${theme.colors.textMedium};
+    }
   `}
 
   svg {
