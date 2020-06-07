@@ -90,6 +90,33 @@ describe('ListPosts', () => {
     expect(response.total).toBe(1);
   });
 
+  it('Should be able to list post with non-existing category', async () => {
+    const post1 = await fakePostsRepository.create({
+      title: 'Macbook',
+      description: 'Notebook Apple.',
+      category_id: 'category',
+      user_id: 'user-id',
+      images: [],
+    });
+
+    const post2 = await fakePostsRepository.create({
+      title: 'Macbook',
+      description: 'Notebook Apple.',
+      category_id: 'category',
+      user_id: 'user-id',
+      images: [],
+    });
+
+    const response = await listPosts.execute({
+      per_page: 2,
+      page: 1,
+      category: 'non-existing',
+    });
+
+    expect(response.posts).toEqual([post1, post2]);
+    expect(response.total).toBe(2);
+  });
+
   it('Should be able to filter posts by title', async () => {
     const post1 = await fakePostsRepository.create({
       title: 'Macbook',
