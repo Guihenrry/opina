@@ -1,44 +1,60 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h1 align="center">
+  <img alt="Opina" src="../.github/logo.png" width="250px" />
+</h1>
 
-## Available Scripts
+<h3 align="center">
+  Aplicação web com ReactJS para o aplicativo Opina
+</h3>
 
-In the project directory, you can run:
 
-### `yarn start`
+<p align="center">
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/Guihenrry/opina?color=%23506CB2">
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+  <a href="https://www.linkedin.com/in/guilhermehenrry/">
+    <img alt="Made by Gui Henrry" src="https://img.shields.io/badge/made%20by-Gui%20Henrry-%23506CB2">
+  </a>
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+  <img alt="License" src="https://img.shields.io/badge/licence-MIT-%23506CB2">
+</p>
 
-### `yarn test`
+<p align="center">
+  <img alt="Mockup" src="../.github/web-demo.gif" width="600px" />
+</p>
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
+## :pushpin: Índice
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- [Sobre o projeto](#information_source-sobre-o-projeto)
+- [Tecnologias](#rocket-tecnologias)
+- [Como utilizar](#construction_worker-como-utilizar)
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## :information_source: Sobre o projeto
+Aplicação para se expressar e saber a opinião do publico sobre um produto. Este repositorio contém aplicação backend e frontend. Para conhecer as funcionalidades e como execultar em outros ambientes [clique aqui](https://github.com/Guihenrry/opina).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## :rocket: Tecnologias
 
-### `yarn eject`
+Algumas tecnologias e ferramentas utilizadas.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- [ReactJS](https://reactjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [React Router DOM](https://reacttraining.com/react-router/)
+- [Styled Components](https://styled-components.com/)
+- [Yup](https://github.com/jquense/yup)
+- [Axios](https://github.com/axios/axios)
+- [Eslint](https://eslint.org/) + [Prettier](https://prettier.io/) + [EditorConfig](https://editorconfig.org/)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## :construction_worker: Como utilizar
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+**OBS:** Para utilizar este projeto será necessário que a [API](https://github.com/Guihenrry/opina/blob/master/backend/README.md) esteja em execução.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```bash
+# Instalar as dependencias
+$ yarn
 
-## Learn More
+# Execute o projeto na porta 3000
+$ yarn start
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Feito com 💜 by [Gui Henrry](https://www.linkedin.com/in/guilhermehenrry/) ✌
