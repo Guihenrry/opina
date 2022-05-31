@@ -21,6 +21,7 @@ app.use(errors());
 app.use(exceptionHandling);
 app.use('/files', express.static(storageConfig.uploadsFolder));
 
-app.listen(3333, () => {
-  console.log('🚀 server started in port 3333');
+const port = process.env.PORT || 3333;
+app.listen(port, () => {
+  console.log(`🚀 server started in port ${port}`);
 });
