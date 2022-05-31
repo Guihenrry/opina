@@ -41,6 +41,10 @@ class DiskStorageProvider implements IStorageProvider {
   public async saveFiles(files: IFileDTO[]): Promise<void> {
     const { tmpFolder, uploadsFolder } = storageConfig;
 
+    if (!fs.existsSync(uploadsFolder)) {
+      fs.mkdirSync(uploadsFolder);
+    }
+
     Promise.all(
       files.map(file => {
         return fs.promises.rename(
