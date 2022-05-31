@@ -6,7 +6,6 @@
   Aplicação web com ReactJS para o aplicativo Opina
 </h3>
 
-
 <p align="center">
   <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/Guihenrry/opina?color=%23506CB2">
 
@@ -21,7 +20,6 @@
   <img alt="Mockup" src="../.github/web-demo.gif" width="600px" />
 </p>
 
-
 ## :pushpin: Índice
 
 - [Sobre o projeto](#information_source-sobre-o-projeto)
@@ -29,6 +27,7 @@
 - [Como utilizar](#construction_worker-como-utilizar)
 
 ## :information_source: Sobre o projeto
+
 Aplicação para se expressar e saber a opinião do publico sobre um produto. Este repositorio contém aplicação backend e frontend. Para conhecer as funcionalidades e como execultar em outros ambientes [clique aqui](https://github.com/Guihenrry/opina).
 
 ## :rocket: Tecnologias
@@ -50,6 +49,10 @@ Algumas tecnologias e ferramentas utilizadas.
 ```bash
 # Instalar as dependencias
 $ yarn
+
+# Copiar o arquivo '.env.example' para '.env'
+# e definir suas variaveis de ambiente.
+$ cp .env.example .env
 
 # Execute o projeto na porta 3000
 $ yarn start
