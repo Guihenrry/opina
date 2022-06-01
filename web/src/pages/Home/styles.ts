@@ -165,7 +165,7 @@ interface CategoryButtonProps {
 export const CategoryButton = styled.button<CategoryButtonProps>`
   border: none;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 
   ${({ theme, active }) => css`
