@@ -109,7 +109,7 @@ const Opinion: React.FC<OpinionProps> = ({ data, onDelete, onEdit }) => {
             <S.DateCreated>{createdAtFormatted}</S.DateCreated>
           </S.Info>
 
-          {user.id === data.user.id && (
+          {user && user.id === data.user.id && (
             <S.ActionsContainer>
               <S.ActionsButton type="button" onClick={handleShowActions}>
                 <FiMoreVertical />
