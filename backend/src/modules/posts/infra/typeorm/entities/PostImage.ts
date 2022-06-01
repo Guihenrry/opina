@@ -8,6 +8,9 @@ import {
   JoinColumn,
 } from 'typeorm';
 import { Expose } from 'class-transformer';
+
+import storageConfig from '@config/storage';
+
 import Post from './Post';
 
 @Entity('post_images')
@@ -33,6 +36,10 @@ class PostImage {
 
   @Expose({ name: 'image' })
   getImageUrl(): string {
+    if (storageConfig.driver === 's3') {
+      return `https://${storageConfig.awsS3.bucketName}.s3.amazonaws.com/${this.filename}`;
+    }
+
     return `${process.env.APP_API_URL}/files/${this.filename}`;
   }
 }

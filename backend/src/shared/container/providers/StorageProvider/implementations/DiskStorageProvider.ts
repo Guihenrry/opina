@@ -8,6 +8,10 @@ class DiskStorageProvider implements IStorageProvider {
   public async saveFile(file: string): Promise<string> {
     const { tmpFolder, uploadsFolder } = storageConfig;
 
+    if (!fs.existsSync(uploadsFolder)) {
+      fs.mkdirSync(uploadsFolder);
+    }
+
     await fs.promises.rename(
       path.resolve(tmpFolder, file),
       path.resolve(uploadsFolder, file),
@@ -45,7 +49,7 @@ class DiskStorageProvider implements IStorageProvider {
       fs.mkdirSync(uploadsFolder);
     }
 
-    Promise.all(
+    await Promise.all(
       files.map(file => {
         return fs.promises.rename(
           path.resolve(tmpFolder, file.filename),
